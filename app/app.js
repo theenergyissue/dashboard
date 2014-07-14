@@ -90,7 +90,9 @@ router.use(function(req, res, next) {
 
 // home page route (http://localhost:8080)
 router.get('/', function(req, res) {
-	res.send('im the home page!');
+	res.render('index', { title: 'The Energy Issue Analytics' }, function(err, html){
+
+  });
 });
 
 

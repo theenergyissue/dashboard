@@ -43,6 +43,10 @@ var tumblr = require('tumblr'),
     util = require('util'),
     TumblrStrategy = require('passport-tumblr').Strategy;
 
+//Setup Express to work with passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // Use the TumblrStrategy within Passport.
 //   Strategies in passport require a `verify` function, which accept

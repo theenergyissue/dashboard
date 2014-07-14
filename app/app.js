@@ -1,35 +1,23 @@
+// server.js
 
-/**
- * Module dependencies.
- */
+// BASE SETUP
+// ==============================================
 
-var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
-  , http = require('http')
-  , path = require('path');
+var express = require('express');
+var app     = express();
+var port    = 	process.env.PORT || 1337;
 
-var app = express();
+// ROUTES
+// ==============================================
 
-// all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.bodyParser());
-app.use(express.methodOverride());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
-
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
-
-app.get('/', routes.index);
-app.get('/users', user.list);
-
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+// sample route with a route the way we're used to seeing it
+app.get('/sample', function(req, res) {
+	res.send('this is a sample!');
 });
+
+// we'll create our routes here
+
+// START THE SERVER
+// ==============================================
+app.listen(port);
+console.log('Magic happens on port ' + port);

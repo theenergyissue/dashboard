@@ -93,6 +93,9 @@ passport.use(new TumblrStrategy({
         token_secret: tokenSecret
       });
 
+      console.log('tumblrClient:');
+      console.dir(tumblrClient);
+
       // To keep the example simple, the user's Tumblr profile is returned to
       // represent the logged-in user.  In a typical application, you would want
       // to associate the Tumblr account with a user record in your database,

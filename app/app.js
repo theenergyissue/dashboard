@@ -38,8 +38,8 @@ app.use(methodOverride());
 // get an instance of router
 var router = express.Router();
 
-console.log('router:');
-console.dir(router);
+console.log('express:');
+console.dir(express);
 
 // home page route (http://localhost:8080)
 router.get('/', function(req, res) {

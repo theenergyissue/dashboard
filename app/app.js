@@ -146,8 +146,8 @@ app.get('/auth/tumblr',
 app.get('/auth/tumblr/callback',
   passport.authenticate('tumblr', { failureRedirect: '/login' }),
   function(req, res) {
-    req.locals.tumblrClient = tumblrClient;
-    
+    req.tumblrClient = tumblrClient;
+
     res.redirect('/tumblr');
   });
 

@@ -9,7 +9,7 @@ exports.index = function(req, res){
 
 exports.tumblr = function(req, res){
 
-  req.locals.tumblrClient.userInfo(function (err, data) {
+  req.tumblrClient.userInfo(function (err, data) {
     data.blogs.forEach(function (blog) {
         console.log(blog.name);
     });

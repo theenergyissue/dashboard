@@ -8,6 +8,7 @@ var secrets = require(__dirname + '/secrets');
 var express = require('express');
 var app     = express();
 var port    = process.env.PORT || 1337;
+var routes  = require('./routes');
 
 // MIDDLEWARE
 // ==============================================

@@ -11,6 +11,7 @@ var port    = 	process.env.PORT || 1337;
 // MIDDLEWARE
 // ==============================================
 
+/*
 var morgan         = require('morgan');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
@@ -29,6 +30,7 @@ app.use(bodyParser.json());
 
 // simulate DELETE and PUT
 app.use(methodOverride());
+*/
 
 // ROUTES
 // ==============================================

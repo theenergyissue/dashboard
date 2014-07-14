@@ -23,10 +23,11 @@ app.use(methodOverride()); 					// simulate DELETE and PUT
 // ROUTES
 // ==============================================
 
-// we'll create our routes here
-
 // get an instance of router
 var router = express.Router();
+
+console.log('router:');
+console.dir(router);
 
 // home page route (http://localhost:8080)
 router.get('/', function(req, res) {

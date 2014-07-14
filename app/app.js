@@ -110,9 +110,9 @@ router.use(function(req, res, next) {
 
 // home page route (http://localhost:8080)
 
-router.get('/', function(req, res) {
-	res.render('index', { title: 'Express' });
-});
+router.get('/', routes.index);
+
+router.get('/tumblr', routes.tumblr);
 
 
 
@@ -137,7 +137,7 @@ app.get('/auth/tumblr',
 app.get('/auth/tumblr/callback',
   passport.authenticate('tumblr', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
+    res.redirect('/tumblr');
   });
 
 

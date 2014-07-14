@@ -19,6 +19,7 @@ var session        = require('express-session');
 
 //set render engine to EJS
 app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 // set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + '/public'));

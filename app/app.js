@@ -22,7 +22,9 @@ app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 
 // pull information from html in POST
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 
 // simulate DELETE and PUT

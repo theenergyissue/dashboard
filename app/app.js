@@ -3,7 +3,7 @@
 // BASE SETUP
 // ==============================================
 
-var secrets = require('secrets');
+var secrets = require(__dirname + '/secrets');
 
 var express = require('express');
 var app     = express();

@@ -3,6 +3,8 @@
 // BASE SETUP
 // ==============================================
 
+var secrets = require('secrets');
+
 var express = require('express');
 var app     = express();
 var port    = process.env.PORT || 1337;
@@ -13,6 +15,7 @@ var port    = process.env.PORT || 1337;
 var logger         = require('morgan');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
+var session        = require('express-session');
 
 // set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + '/public'));
@@ -28,6 +31,45 @@ app.use(bodyParser.json());
 
 // simulate DELETE and PUT
 app.use(methodOverride());
+
+app.use(session({secret: 'keyboard cat'}))
+
+
+// AUTHENTICATION
+// ==============================================
+
+var tumblr = require('tumblr'),
+    passport = require('passport'),
+    util = require('util'),
+    TumblrStrategy = require('passport-tumblr').Strategy;
+
+
+// Use the TumblrStrategy within Passport.
+//   Strategies in passport require a `verify` function, which accept
+//   credentials (in this case, a token, tokenSecret, and Tumblr profile), and
+//   invoke a callback with a user object.
+passport.use(new TumblrStrategy({
+    consumerKey: secrets.TUMBLR_CONSUMER_KEY,
+    consumerSecret: secrets.TUMBLR_SECRET_KEY,
+    callbackURL: "http://analytics.theenergyissue.com/auth/tumblr/callback"
+  },
+  function(token, tokenSecret, profile, done) {
+    // asynchronous verification, for effect...
+    process.nextTick(function () {
+
+      console.log('token: ' + token);
+      console.log('tokenSecret: ' + tokenSecret);
+
+      // To keep the example simple, the user's Tumblr profile is returned to
+      // represent the logged-in user.  In a typical application, you would want
+      // to associate the Tumblr account with a user record in your database,
+      // and return that user instead.
+      return done(null, profile);
+    });
+  }
+));
+
+
 
 // ROUTES
 // ==============================================
@@ -47,8 +89,37 @@ router.get('/', function(req, res) {
 	res.send('im the home page!');
 });
 
+
+
+// GET /auth/tumblr
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  The first step in Tumblr authentication will involve redirecting
+//   the user to tumblr.com.  After authorization, Tumblr will redirect the user
+//   back to this application at /auth/tumblr/callback
+app.get('/auth/tumblr',
+  passport.authenticate('tumblr'),
+  function(req, res){
+    // The request will be redirected to Tumblr for authentication, so this
+    // function will not be called.
+  });
+
+// GET /auth/tumblr/callback
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  If authentication fails, the user will be redirected back to the
+//   login page.  Otherwise, the primary route function function will be called,
+//   which, in this example, will redirect the user to the home page.
+app.get('/auth/tumblr/callback',
+  passport.authenticate('tumblr', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
+
+
+
 // apply the routes to our application
 app.use('/', router);
+
 
 // login routes
 app.route('/login')

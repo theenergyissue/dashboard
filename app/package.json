@@ -11,6 +11,7 @@
     "morgan": "*",
     "body-parser": "*",
     "method-override": "*",
+    "express-session": "*",
     "tumblr": "*",
     "passport": "*",
     "passport-tumblr": "*"

@@ -94,7 +94,7 @@ router.use(function(req, res, next) {
 
 // home page route (http://localhost:8080)
 router.get('/', function(req, res) {
-	res.render('index', { title: 'The Energy Issue Analytics' }, function(err, html){
+	res.render('index.ejs', { title: 'The Energy Issue Analytics' }, function(err, html){
 
   });
 });

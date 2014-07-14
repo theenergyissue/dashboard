@@ -10,6 +10,9 @@
     "ejs": "*",
     "morgan": "*",
     "body-parser": "*",
-    "method-override": "*"
+    "method-override": "*",
+    "tumblr": "*",
+    "passport": "*",
+    "passport-tumblr": "*"
   }
 }

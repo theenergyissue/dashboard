@@ -43,10 +43,12 @@ app.use(session({secret: 'keyboard cat'}))
 // AUTHENTICATION
 // ==============================================
 
-var tumblr = require('tumblr'),
+var tumblr = require('tumblr.js'),
     passport = require('passport'),
     util = require('util'),
     TumblrStrategy = require('passport-tumblr').Strategy;
+
+var tumblrClient;
 
 //Setup Express to work with passport
 app.use(passport.initialize());
@@ -81,8 +83,15 @@ passport.use(new TumblrStrategy({
     // asynchronous verification, for effect...
     process.nextTick(function () {
 
-      console.log('token: ' + token);
-      console.log('tokenSecret: ' + tokenSecret);
+      console.log('tumblr token: ' + token);
+      console.log('tumblr tokenSecret: ' + tokenSecret);
+
+      tumblrClient = tumblr.createClient({
+        consumer_key: secrets.TUMBLR_CONSUMER_KEY,
+        consumer_secret: secrets.TUMBLR_SECRET_KEY,
+        token: token,
+        token_secret: tokenSecret
+      });
 
       // To keep the example simple, the user's Tumblr profile is returned to
       // represent the logged-in user.  In a typical application, you would want
@@ -137,6 +146,8 @@ app.get('/auth/tumblr',
 app.get('/auth/tumblr/callback',
   passport.authenticate('tumblr', { failureRedirect: '/login' }),
   function(req, res) {
+    req.locals.tumblrClient = tumblrClient;
+    
     res.redirect('/tumblr');
   });
 

@@ -8,5 +8,14 @@ exports.index = function(req, res){
 };
 
 exports.tumblr = function(req, res){
-  res.render('tumblr', { title: 'Tumblr'});
+
+  req.locals.tumblrClient.userInfo(function (err, data) {
+    data.blogs.forEach(function (blog) {
+        console.log(blog.name);
+    });
+
+    res.render('tumblr', { title: 'Tumblr', blog: data.blogs[0]});
+  });
+
+
 }

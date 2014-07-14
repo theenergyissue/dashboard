@@ -6,7 +6,13 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "4.6.1",
-    "ejs": "*"
+    "express": "3.2.0",
+    "ejs": "*",
+    "morgan": "*",
+    "body-parser": "*",
+    "method-override": "*",
+    "tumblr": "*",
+    "passport": "*",
+    "passport-tumblr": "*"
   }
 }

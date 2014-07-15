@@ -101,6 +101,9 @@ passport.use(new TumblrStrategy({
 
 
       tumblrClient.userInfo(function (err, data) {
+        console.log('data:');
+        console.dir(data);
+
         data.blogs.forEach(function (blog) {
             console.log(blog.name);
         });

@@ -12,7 +12,7 @@ exports.tumblr = function(req, res){
 
 
     res.render('tumblr', { title: 'Tumblr', blog: 'test'});
-  });
+
 
 
 }

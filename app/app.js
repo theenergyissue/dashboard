@@ -99,6 +99,12 @@ passport.use(new TumblrStrategy({
       console.log('profile:');
       console.dir(profile);
 
+
+      tumblrClient.userInfo(function (err, data) {
+        data.blogs.forEach(function (blog) {
+            console.log(blog.name);
+        });
+
       // To keep the example simple, the user's Tumblr profile is returned to
       // represent the logged-in user.  In a typical application, you would want
       // to associate the Tumblr account with a user record in your database,
@@ -152,7 +158,7 @@ app.get('/auth/tumblr',
 app.get('/auth/tumblr/callback',
   passport.authenticate('tumblr', { failureRedirect: '/login' }),
   function(req, res) {
-    req.tumblrClient = tumblrClient;
+    //req.tumblrClient = tumblrClient;
 
     res.redirect('/tumblr');
   });

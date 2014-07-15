@@ -104,6 +104,7 @@ passport.use(new TumblrStrategy({
         data.blogs.forEach(function (blog) {
             console.log(blog.name);
         });
+      });
 
       // To keep the example simple, the user's Tumblr profile is returned to
       // represent the logged-in user.  In a typical application, you would want

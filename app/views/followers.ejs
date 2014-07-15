@@ -16,15 +16,18 @@
     <script>
       $(document).ready(function(){
 
+        var total_followers = parseInt(<%= followers %>);
+        var goal = 1000 - total_followers;
+
         var data = [
             {
-                value: <%= followers %>,
+                value: total_followers,
                 color:"#F7464A",
                 highlight: "#FF5A5E",
                 label: "Followers"
             },
             {
-                value: 1000,
+                value: goal,
                 color: "#FDB45C",
                 highlight: "#FFC870",
                 label: "Goal"

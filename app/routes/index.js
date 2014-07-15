@@ -9,7 +9,7 @@ exports.index = function(req, res){
 
 exports.tumblr = function(req, res){
 
-
+  console.log('index.tumblr');
 
     res.render('tumblr', { title: 'Tumblr', blog: 'test'});
 

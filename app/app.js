@@ -104,7 +104,7 @@ passport.use(new TumblrStrategy({
         console.log('data:');
         console.dir(data);
 
-        data.blogs.forEach(function (blog) {
+        data.user.blogs.forEach(function (blog) {
             console.log(blog.name);
         });
       });

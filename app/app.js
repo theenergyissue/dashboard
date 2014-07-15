@@ -100,14 +100,6 @@ passport.use(new TumblrStrategy({
       console.dir(profile);
 
 
-      tumblrClient.userInfo(function (err, data) {
-        console.log('data:');
-        console.dir(data);
-
-        data.user.blogs.forEach(function (blog) {
-            console.log(blog.name);
-        });
-      });
 
       // To keep the example simple, the user's Tumblr profile is returned to
       // represent the logged-in user.  In a typical application, you would want
@@ -162,12 +154,23 @@ app.get('/auth/tumblr',
 app.get('/auth/tumblr/callback',
   passport.authenticate('tumblr', { failureRedirect: '/login' }),
   function(req, res) {
-    //req.tumblrClient = tumblrClient;
+    req.session.tumblrClient = tumblrClient;
 
     res.redirect('/tumblr');
   });
 
 
+app.get('/tumblr/followers', function(req, res){
+  tumblrClient.userInfo(function (err, data) {
+    console.log('data:');
+    console.dir(data);
+
+    data.user.blogs.forEach(function (blog) {
+        console.log(blog.name);
+    });
+  });
+  
+});
 
 
 // apply the routes to our application

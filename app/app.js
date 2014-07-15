@@ -167,9 +167,9 @@ app.get('/tumblr/followers', function(req, res){
     console.log('followers data:');
     console.dir(data);
 
-    var followers = data.total_users; 
+    var followers = data.total_users;
 
-    res.render('followers', {title: 'Tumblr', followers: followers });
+    res.render('followers', {title: 'Tumblr', followers: followers, name: "Weekly Following Goal" });
   });
 
 });

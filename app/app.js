@@ -161,15 +161,17 @@ app.get('/auth/tumblr/callback',
 
 
 app.get('/tumblr/followers', function(req, res){
-  tumblrClient.userInfo(function (err, data) {
-    console.log('data:');
+
+
+  tumblrClient.followers('theenergyissue', function (err, data) {
+    console.log('followers data:');
     console.dir(data);
 
-    data.user.blogs.forEach(function (blog) {
-        console.log(blog.name);
-    });
+    var followers = 2; 
+
+    res.render('followers', {title: 'Tumblr', followers: followers });
   });
-  
+
 });
 
 
